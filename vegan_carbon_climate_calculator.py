@@ -1,10 +1,8 @@
 import streamlit as st
 
-# Vegetable images - clean icons (public URLs)
 VEGETABLE_IMAGES = {
     "carrot": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Carrot_icon.svg",
     "broccoli": "https://upload.wikimedia.org/wikipedia/commons/2/28/Broccoli_icon.svg",
-    "tomato": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Tomato_icon.svg",
 }
 
 st.set_page_config(page_title="Vegan Carbon Impact Calculator", layout="centered")
@@ -34,7 +32,4 @@ with output_col:
     total_emissions = 7.3  # GT CO2e from animal ag
     carbon_budget_1_5 = 130  # GT CO2 budget
     
-    emissions_saved = total_emissions * (percent_vegan / 100)
-    added_years_1_5 = carbon_budget_1_5 / total_emissions * (percent_vegan / 100)
-
-    # Card style container for metrics
+    emissions_saved = total_emissions
