@@ -1,8 +1,10 @@
 import streamlit as st
 
-# Vegetable image URLs - colorful, modern icons
-carrot_img = "https://cdn-icons-png.flaticon.com/512/415/415733.png"
-broccoli_img = "https://cdn-icons-png.flaticon.com/512/415/415735.png"
+# Vegetable & grain images - vegan healthy food icons
+carrot_img = "https://cdn-icons-png.flaticon.com/512/415/415733.png"      # carrot
+broccoli_img = "https://cdn-icons-png.flaticon.com/512/415/415735.png"    # broccoli
+rice_img = "https://cdn-icons-png.flaticon.com/512/135/135663.png"        # rice grain icon
+leafy_greens_img = "https://cdn-icons-png.flaticon.com/512/414/414738.png" # leafy greens icon
 veggies_banner = "https://cdn-icons-png.flaticon.com/512/135/135619.png"  # Veggie basket icon
 
 st.set_page_config(page_title="Vegan Carbon Impact Calculator", layout="centered", page_icon=veggies_banner)
@@ -37,7 +39,7 @@ with col2:
     emissions_saved = total_emissions * (percent_vegan / 100)
     added_years_1_5 = carbon_budget_1_5 / total_emissions * (percent_vegan / 100)
     
-    # Styled metrics with images and colored backgrounds
+    # Emissions Reduced: carrot icon - vegetable (healthy food)
     st.markdown(
         f"""
         <div style="
@@ -59,6 +61,7 @@ with col2:
         unsafe_allow_html=True,
     )
 
+    # Added Years Until Threshold: rice grain icon - healthy grain 
     st.markdown(
         f"""
         <div style="
@@ -69,7 +72,7 @@ with col2:
             padding:20px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         ">
-            <img src="{broccoli_img}" width="70" style="margin-right:20px;"/>
+            <img src="{rice_img}" width="70" style="margin-right:20px;"/>
             <div>
                 <div style="font-weight:700; color:#40916c; font-size:18px;">Added Years Until 1.5°C Threshold</div>
                 <div style="font-size:28px; color:#2f855a;">{added_years_1_5:.1f} years</div>
