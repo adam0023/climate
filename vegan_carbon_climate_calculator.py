@@ -1,34 +1,56 @@
 import streamlit as st
 
-st.title("Carbon Emissions Reduction & Climate Impact Calculator for Global Veganism")
+# Use a cleaner vegetable icon style
+VEGETABLE_IMAGE_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vegetables_icon.svg/512px-Vegetables_icon.svg.png"
 
-# Input slider for veganism adoption %
-percent_vegan = st.slider("Percentage of Global Population Converting to Veganism", 0, 100, 0)
+st.set_page_config(page_title="Vegan Carbon Impact Calculator", layout="centered")
 
-# Constants
-total_animal_ag_emissions = 7.3  # gigatons CO2e per year (14.5% global emissions)
-carbon_budget_1_5C = 130  # Approximate remaining carbon budget in gigatons CO2 for 1.5°C
+# Title with vegetable icon
+st.markdown(
+    f"""
+    <div style="display:flex; align-items:center;">
+        <img src="{VEGETABLE_IMAGE_URL}" width="60" style="margin-right:15px"/>
+        <h1 style="color:#2E7D32;">Vegan Carbon Emissions & Climate Impact Calculator</h1>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Calculate emissions reduction
-emissions_saved = total_animal_ag_emissions * (percent_vegan / 100)
+st.write("---")
 
-# Calculate added years to carbon budget for 1.5°C
-if total_animal_ag_emissions > 0:
-    added_years_1_5 = carbon_budget_1_5C / total_animal_ag_emissions * (percent_vegan / 100)
-else:
-    added_years_1_5 = 0
+# Use columns to separate input and output for cleaner presentation
+input_col, output_col = st.columns(2)
 
-# Display results
-st.write(f"At {percent_vegan}% veganism adoption, estimated global carbon emissions reduction is:")
-st.write(f"**{emissions_saved:.2f} gigatons of CO2 equivalent per year**")
+with input_col:
+    st.subheader("Adjust veganism level")
+    percent_vegan = st.slider(
+        "Percentage of global population adopting veganism", 0, 100, 0, 5
+    )
 
-st.write(f"Estimated additional time gained before reaching the 1.5°C warming threshold:")
-st.write(f"**{added_years_1_5:.1f} years** (theoretical estimate based on carbon budget)")
+with output_col:
+    st.subheader("Your impact")
+    total_emissions = 7.3  # GT CO2e from animal ag
+    carbon_budget_1_5 = 130  # GT CO2 budget
+    
+    emissions_saved = total_emissions * (percent_vegan / 100)
+    added_years_1_5 = carbon_budget_1_5 / total_emissions * (percent_vegan / 100)
 
-st.markdown("""
----
-Animal agriculture accounts for approximately 14.5% of global greenhouse gas emissions, or about 7.3 gigatons CO2e annually.  
-The remaining carbon budget for 1.5°C warming is around 130 gigatons CO2.  
-This calculator estimates proportional emissions savings and added time to the climate threshold based on global veganism adoption.  
-Note: This is a simplified estimate ignoring feedback loops and other greenhouse gases.
-""")
+    st.metric(
+        label="Estimated Emissions Reduced (GT CO2e/year)",
+        value=f"{emissions_saved:.2f}"
+    )
+    st.metric(
+        label="Added Years Until 1.5°C Threshold",
+        value=f"{added_years_1_5:.1f}"
+    )
+
+st.markdown(
+    """
+    ---
+    Animal agriculture contributes ~14.5% of global greenhouse gas emissions.
+    This tool estimates emissions saved and additional time gained toward climate goals based on your veganism adoption level.
+
+    Small changes add up to big impact! 🌱
+    """
+)
+
